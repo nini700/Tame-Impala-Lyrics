@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Lyrics</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="lyrics-container">
+            <p class="line" data-text="i cannot vanish">i cannot vanish</p>
+            <p class="line" data-text="you will not scare me">you will not scare me</p>
+            <p class="line" data-text="try to get through it">try to get through it</p>
+            <p class="line" data-text="try to push through it">try to push through it</p>
+            <p class="line" data-text="you were not thinking that i will not do it">you were not thinking that i will not do it</p>
+            <p class="line" data-text="they be lovin' someone">they be lovin' someone</p>
+            <p class="line" data-text="and i'm another story">and i'm another story</p>
+            <p class="line" data-text="take the next ticket">take the next ticket</p>
+            <p class="line" data-text="take the next train">take the next train</p>
+            <p class="line" data-text="why would i do it?">why would i do it?</p>
+            <p class="line" data-text="anyone'd think that">anyone'd think that</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const lines = document.querySelectorAll('.line');
+            const delays = [300, 200, 300, 400, 700, 400, 500, 700, 600, 500, 300];
+            
+            const animateLines = async () => {
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i];
+                    const text = line.getAttribute('data-text');
+                    line.textContent = '';
+                    line.style.opacity = '1';
+                    line.style.transform = 'translateX(0)';
+                    
+                    for (const char of text) {
+                        line.textContent += char;
+                        await new Promise(resolve => setTimeout(resolve, 80));
+                    }
+                    await new Promise(resolve => setTimeout(resolve, delays[i]));
+                }
+            };
+            
+            animateLines();
+        });
+    </script>
+</body>
+</html>
